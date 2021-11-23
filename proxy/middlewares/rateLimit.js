@@ -1,5 +1,6 @@
 const redis = require('../app/clientRedis');
-
+const expiration = process.env.REDIS_EXPIRATION_INTERVAL;
+const limit_request = process.env.REDIS_LIMIT_REQUEST;
 
  function  rateLimit(){
 
@@ -12,14 +13,14 @@ const redis = require('../app/clientRedis');
         let tiempoRestante;
         if(request === 1)
         {
-            await redis.expire(ip,10);
-            tiempoRestante = 10;
+            await redis.expire(ip,expiration);
+            tiempoRestante = expiration;
         }else 
         {
             tiempoRestante = await redis.ttl(ip);
         }
     
-        if(request > 20)
+        if(request > limit_request)
         {
             return res.status(503).json({
                 type_msg : 'interno',

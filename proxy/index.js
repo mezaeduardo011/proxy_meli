@@ -9,7 +9,7 @@ const rateLimit = require('./middlewares/rateLimit');
 const registroEstadisticas = require('./middlewares/registroEstadisticas');
 const db = require('./app/db');
 const app = express();
-const API_SERVICE_URL = "https://api.mercadolibre.com/";
+const API_SERVICE_URL = process.env.API_SERVICE_URL;
 
 app.use(express.json());
 

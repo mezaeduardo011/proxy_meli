@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost/proxy_meli?authSource=admin';
+const url = process.env.DB_URL;
 
 var options = {
-    user: "admin",
-    pass: "admin"
+    user: process.env.DB_USER,
+    pass: process.env.DB_PASS
   };
 
 mongoose.connect(url,options)
