@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<body>
+     <h1>API</h1>   
+     <button id="btnRequest">ENVIAR REQUEST</button> 
+
+     <pre id="output"></pre>
+
+     <script>
+         const btnRequest = document.getElementById('btnRequest'); 
+        const output = document.getElementById('output');
+
+        btnRequest.addEventListener('click' , () => enviarRequest()); 
+
+         async function enviarRequest(){
+             const res =  await fetch(`/categories/MLA97994`, { method:'GET' }).then( t => t.json());
+            if(res?.type_msg == 'interno')
+            {
+                output.innerText += `\nRespuesta : ${res.response} Request número = ${res.requests} Tiempo restante = ${res.tiempoRestante}`; 
+            }else 
+            {   
+                console.log(res);
+                output.innerText =  JSON.stringify(res);
+            }
+         }
+     </script>
+</body>
+</html>
